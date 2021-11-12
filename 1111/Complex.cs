@@ -8,6 +8,7 @@ namespace _1111
 {
     public class Complex
     {
+        private const double EPS = 0.0000001;
         private double re;
         private double im;
 
@@ -17,10 +18,6 @@ namespace _1111
             {
                 return re;
             }
-            set
-            {
-                re = value;
-            }
         }
         public double Im
         {
@@ -28,10 +25,16 @@ namespace _1111
             {
                 return im;
             }
-            set
-            {
-                im = value;
-            }
+        }
+        public Complex()
+        {
+            re = 0;
+            im = 0;
+        }
+        public Complex(double rem, double imm)
+        {
+            re = rem;
+            im = imm;
         }
         public static Complex operator+(Complex a,Complex b)
         {
@@ -58,19 +61,47 @@ namespace _1111
         {
             try
             {
-                if(a.re == 0 && b.re ==0)
+                if (a.re == 0 && b.re == 0 && a.im == 0 && a.im == 0) 
                 {
                     throw new Exception();
                 }
             }
             catch
             {
-                throw new Exception(")))))");
+                throw new Exception("))))");
             }
             Complex c = new Complex();
             c.re = a.re / b.re;
             c.re = a.im / b.im;
             return c;
+        }
+        
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (Math.Abs(re) >= EPS)
+            {
+                if(Math.Abs(im) > EPS)
+                {
+                    sb.Append($"{re} + i {im}");
+                }
+                else if (Math.Abs(im) < EPS)
+                {
+                    sb.Append($"{re} - i {-im}");
+                }
+            }
+            else if (Math.Abs(re) < EPS)
+            {
+                if (Math.Abs(im) > EPS)
+                {
+                    sb.Append($" i {im}");
+                }
+                else if (Math.Abs(im) < EPS)
+                {
+                    sb.Append($"- i {-im}");
+                }
+            }
+            return sb.ToString();
         }
     }
 }

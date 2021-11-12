@@ -18,13 +18,10 @@ namespace _1111
             double im1 = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("2-oe мнимое число:");
             double im2 = Convert.ToDouble(Console.ReadLine());
-            Complex re = new Complex();
-            Complex im = new Complex();
-            re.Re = re1;
-            re.Im = im1;
-            im.Re = re2;
-            im.Im = im2;
-            Console.WriteLine("{0} + {1}i", (re / im).Re, (re / im).Im);
+            Complex a = new Complex(re1,im1);
+            Complex b = new Complex(re2,im2);
+            Complex c = a + b;
+            Console.WriteLine("{0} + {1}i", c.Re, c.Im);
             Console.ReadKey();
         }
     }
