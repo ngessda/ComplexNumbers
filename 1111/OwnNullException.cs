@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace _1111
 {
-    class Program
+    class OwnNullException : DivideByZeroException
     {
-        static void Main(string[] args)
+        public OwnNullException(string Message)
+            : base(Message)
         {
-            Calculator.Addition();
-            Console.ReadKey();
         }
     }
 }

@@ -9,17 +9,10 @@ namespace _1111
     public class Complex
     {
         private const double EPS = 0.0000001;
+        private const double NULL = 0;
         private double re;
         private double im;
-
-        public double Re
-        {
-            get
-            {
-                return re;
-            }
-        }
-        public double Im
+        public double Conj
         {
             get
             {
@@ -53,26 +46,26 @@ namespace _1111
         public static Complex operator*(Complex a, Complex b)
         {
             Complex c = new Complex();
-            c.re = a.re * b.re;
-            c.im = a.im * b.im;
+            c.re = (a.re * b.re) - (a.im * b.im);
+            c.im = (a.re * b.im) + (a.im * b.re);
             return c;
         }
         public static Complex operator/(Complex a, Complex b)
         {
             try
             {
-                if (a.re == 0 && b.re == 0 && a.im == 0 && a.im == 0) 
+                if (a.re == 0 || b.re == 0 || a.im == 0 || a.im == 0) 
                 {
-                    throw new Exception();
+                    throw new OwnNullException("Ошибка-ошибка");
                 }
             }
-            catch
+            catch(OwnNullException ex)
             {
-                throw new Exception("))))");
+                throw ex;
             }
             Complex c = new Complex();
             c.re = a.re / b.re;
-            c.re = a.im / b.im;
+            c.im = a.im / b.im;
             return c;
         }
         
@@ -83,22 +76,22 @@ namespace _1111
             {
                 if(Math.Abs(im) > EPS)
                 {
-                    sb.Append($"{re} + i {im}");
+                    sb.Append($"{re} + i * {im}");
                 }
                 else if (Math.Abs(im) < EPS)
                 {
-                    sb.Append($"{re} - i {-im}");
+                    sb.Append($"{re} - i * {-im}");
                 }
             }
             else if (Math.Abs(re) < EPS)
             {
                 if (Math.Abs(im) > EPS)
                 {
-                    sb.Append($" i {im}");
+                    sb.Append($" i * {im}");
                 }
                 else if (Math.Abs(im) < EPS)
                 {
-                    sb.Append($"- i {-im}");
+                    sb.Append($"- i * {-im}");
                 }
             }
             return sb.ToString();
